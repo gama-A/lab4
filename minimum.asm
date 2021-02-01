@@ -50,6 +50,16 @@ main:
 
     move $t2, $v0
 
+    slt $t3, $t0, $t1
+    bne $t3, $zero, second_less
+
+second_less:
+    
+    slt $t4, $t1, $t2
+    bne $t4, $zero, answer
+
+this_answer:
+
 exit:
     li $v0, 10
     syscall

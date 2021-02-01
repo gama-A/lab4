@@ -1,22 +1,55 @@
 # minimum.asm program
 # CS 64, Z.Matni, zmatni@ucsb.edu
-#
+# Gama Aristondo
 
 .data
 
 	# TODO: Complete these declarations / initializations
 
-	.asciiz "Enter the next number:\n"
-	.asciiz "Minimum: "
-    .asciiz "\n"
+	Enter: .asciiz "Enter the next number:\n"
+	Min: .asciiz "Minimum: "
+    Newline: .asciiz "\n"
 
 #Text Area (i.e. instructions)
 .text
 
 main:
 
-	# TODO: Write your code here
-    # You can have other labels expressed here, if you need to
+    li $v0, 4
+    la $a0, Enter
+    syscall
+
+    li $v0, 5
+    syscall
+
+    move $t0, $v0
+
+    li $v0, 4
+    la $a0, Newline
+    syscall
+
+    li $v0, 4
+    la $a0, Enter
+    syscall
+
+    li $v0, 5
+    syscall
+
+    move $t1, $v0
+
+    li $v0, 4
+    la $a0, Newline
+    syscall
+
+    li $v0, 4
+    la $a0, Enter
+    syscall
+
+    li $v0, 5
+    syscall
+
+    move $t2, $v0
 
 exit:
-	# TODO: Write code to properly exit a SPIM simulation
+    li $v0, 10
+    syscall

@@ -13,7 +13,9 @@
 #
 .data
 
-	# TODO: Write your initializations here
+	Enter: .asciiz "Enter a number:\n"
+    Factorial: .asciiz "Factorial of "
+    Answer: .asciiz " is:\n"
 
 #Text Area (i.e. instructions)
 .text
@@ -22,4 +24,5 @@ main:
 	# TODO: Write your code here
 
 exit:
-	# TODO: Write code to properly exit a SPIM simulation
+	li $v0, 10
+    syscall

@@ -26,10 +26,6 @@ main:
     move $t0, $v0
 
     li $v0, 4
-    la $a0, Newline
-    syscall
-
-    li $v0, 4
     la $a0, Enter
     syscall
 
@@ -38,10 +34,6 @@ main:
 
     # Second number loaded in
     move $t1, $v0
-
-    li $v0, 4
-    la $a0, Newline
-    syscall
 
     li $v0, 4
     la $a0, Enter
@@ -91,6 +83,12 @@ print_answer:
     li $v0, 1
     move $a0, $t4
     syscall
+
+    li $v0, 4
+    la $a0, Newline
+    syscall
+    
+    j exit
 
 exit:
     li $v0, 10

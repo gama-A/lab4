@@ -22,6 +22,7 @@ main:
     li $v0, 5
     syscall
 
+    # First number loaded in
     move $t0, $v0
 
     li $v0, 4
@@ -35,6 +36,7 @@ main:
     li $v0, 5
     syscall
 
+    # Second number loaded in
     move $t1, $v0
 
     li $v0, 4
@@ -48,17 +50,47 @@ main:
     li $v0, 5
     syscall
 
+    # Third number loaded in
     move $t2, $v0
 
+    # Begin the comparing process
     slt $t3, $t0, $t1
     bne $t3, $zero, second_less
 
+first_less:
+
+    slt $t3, $t0, $t2
+    bne $t3, $zero, third_answer
+
+first_answer:
+    
+    move $t4, $t0
+    j print_answer
+
 second_less:
     
-    slt $t4, $t1, $t2
-    bne $t4, $zero, answer
+    slt $t3, $t1, $t2
+    bne $t3, $zero, third_answer
 
-this_answer:
+second_answer:
+
+    move $t4, $t1
+    j print_answer
+
+third_answer:
+
+    move $t4, $t2
+    j print_answer
+
+print_answer:
+    
+    li $v0, 4
+    la $a0, Min
+    syscall
+
+    li $v0, 1
+    move $a0, $t4
+    syscall
 
 exit:
     li $v0, 10

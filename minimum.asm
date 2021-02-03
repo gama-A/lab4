@@ -46,50 +46,55 @@ main:
     move $t2, $v0
 
     # Begin the comparing process
-    slt $t3, $t0, $t1
-    bne $t3, $zero, second_less
+    blt $t0, $t1, second
+    j third
 
-first_less:
+second:
 
-    slt $t3, $t0, $t2
-    bne $t3, $zero, third_answer
+    blt $t0, $t2, first_answer
+    j third_answer
+
+third:
+
+    blt $t1, $t2, second_answer
+    j third_answer
 
 first_answer:
-    
-    move $t4, $t0
-    j print_answer
 
-second_less:
-    
-    slt $t3, $t1, $t2
-    bne $t3, $zero, third_answer
-
-second_answer:
-
-    move $t4, $t1
-    j print_answer
-
-third_answer:
-
-    move $t4, $t2
-    j print_answer
-
-print_answer:
-    
     li $v0, 4
     la $a0, Min
     syscall
 
+    move $a0, $t0
     li $v0, 1
-    move $a0, $t4
     syscall
+    j exit
+
+second_answer:
+
+    li $v0, 4
+    la $a0, Min
+    syscall
+
+    move $a0, $t1
+    li $v0, 1
+    syscall
+    j exit
+
+third_answer:
+
+    li $v0, 4
+    la $a0, Min
+    syscall
+
+    move $a0, $t2
+    li $v0, 1
+    syscall
+
+exit:
 
     li $v0, 4
     la $a0, Newline
     syscall
-    
-    j exit
-
-exit:
     li $v0, 10
     syscall

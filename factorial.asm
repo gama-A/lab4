@@ -31,13 +31,15 @@ main:
 
     move $t0, $v0
     li $t1, 1
-    beq $t0, $zero, answer
     li $t2, 2
+    beq $t0, $zero, answer
 
 factorial:
 
-    beq $t1, $t0, answer
-    mult $t1
+    bgt $t2, $t0, answer
+    mult $t1, $t2
+    mflo $t1
+    addi $t2, $t2, 1
     j factorial
 
 answer:

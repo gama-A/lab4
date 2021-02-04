@@ -203,17 +203,25 @@ doSwap:
         #   y--
         # }
 
-        li $t0, 0  # x variable equals $t0
-        li $t1, 10 # y variable equals $t1
-        li $t2, 5  # variable used to stop the loop
+        li $t0, 0
+        li $t1, 40
+        li $t2, 5
 
 doSwap_loop:
 
-
-        li $t0, 
+        bne $t0, $t2, endLoop
+        la $t3, myArray
+        sll $t0, $t0, 2
+        addu $t4, $t3, $t0
+        lw $t5, 0($t4)
+        move $t6, $t5
+        addu $t7, $t3, $t1
+        sw $t5, 0($t7)
+        sw $t7, 0($t6)
         addi $t0, $t0, 1
-        addi $t1, $t1, -1
-        bne $t0, $t2, doSwap_loop
+        addi $t1, $t1, -4
+        j doSwap_loop
 
+endLoop:
         # do not remove this last line
         jr $ra

@@ -203,24 +203,26 @@ doSwap:
         #   y--
         # }
 
-        li $t0, 0
-        li $t1, 40
-        li $t2, 5
+        li $t4, 0
+        li $t5, 5
+        la $t0, myArray
+        li $t6, 10
+        li $t7, 4
+        mult $t6, $t7
+        mflo $t6
+        add $t1, $t0, $t6
 
 doSwap_loop:
 
-        bne $t0, $t2, endLoop
-        la $t3, myArray
-        sll $t0, $t0, 2
-        addu $t4, $t3, $t0
-        lw $t5, 0($t4)
-        move $t6, $t5
-        addu $t7, $t3, $t1
-        sw $t5, 0($t7)
-        sw $t7, 0($t6)
-        addi $t0, $t0, 1
-        addi $t1, $t1, -4
-        j doSwap_loop
+        lw $t2, 0($t0)
+        lw $t3, 0($t1)
+        sw $t2, 0($t1)
+        sw $t3, 0($t0)
+
+        addiu $t0, $t0, 4
+        addiu $t1, $t1, -4
+        addi $t4, $t4, 1
+        bne $t4, $t5, doSwap_loop
 
 endLoop:
         # do not remove this last line
